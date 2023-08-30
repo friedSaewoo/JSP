@@ -1,0 +1,71 @@
+
+
+퍼블리싱 압축파일 풀기
+
+finalProject 프로젝트 만들기
+
+1. web.xml 만들기
+
+2. 루트경로 /로 설정하기
+
+3. WebContent에 assets폴더 만들고 압축 해제한 폴더 전부 넣기
+   - 로그인, 회원가입, 게시판 페이지가 있는 것 확인
+
+4. com.example.app.member.MemberFrontController.java
+    com.example.app.board.BoardFrontController.java    
+    만들고 extends HttpServlet 하고 
+    doGet() , doPost() 재정의 해놓기
+ 
+5. jsp파일은 WebContent에 프론트 컨트롤러와 동일한 위치로 만들기    
+    com.example은 항상 고정되는 경로이므로 app폴더 안에 member폴더 만드는식   
+    app/member/ join.jsp, login.jsp 만들기   
+    app/board/ boardList.jsp, boardRead.jsp, boardWrite.jsp 만들기
+    
+6. 이제 html 코드를 각 jsp파일에 복붙하기
+
+7. 경로 확인하기-css 작동하지 않음
+   css 경로 수정하기
+
+8. member 테이블 생성하기
+
+9. mybatis 설정(빌드패스, lib 폴더에 jar추가하기)
+
+10. config.xml
+   <mappers>
+
+11. 프론트컨트롤러 설정, 각 페이지 링크 연결시키기
+   web.xml 파일 수정
+   MemberFrontController 수정
+
+   .jsp 파일들마다 버튼 링크 수정
+      <a href = "${pageContext.request.contextPath}/member/login.me" ...>
+
+   BoardFrontController 수정
+   
+12. 회원가입 서비스 구현하기
+   com.example.app.member.dto.MemberDTO.java 만들기
+      게터 세터, toString 오버라이딩까지 진행
+
+13. config.xml 별칭 추가
+   <typeAliases>
+      <typeAlias type = "com.example.app.member.dto.MemberDTO" alias = "MemberDTO"/>
+
+14. MemberMapper.xml
+   <mapper namespace = "member">
+      <insert id="join" parameterType = "MemberDTO">
+         쿼리문작성
+      </insert>
+   </mapper>
+
+15. com.example.app.member.dao.MemberDAO.java
+   {
+      SqlSession sqlSession;
+      public MemberDAO(){
+         sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
+      }
+      
+      메소드
+      public void join(MemberDTO memberDTO){
+         sqlSession.insert("member.join", memberDTO);
+      }
+   }

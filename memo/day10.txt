@@ -1,0 +1,90 @@
+검정 <input type = "checkbox" name = "color" value = "black">
+파랑 <input type = "checkbox" name = "color" value = "blue">
+빨강 <input type = "checkbox" name = "color" value = "red">
+
+GET 방식과 POST 방식
+GET방식
+	주소(URL)에 데이터를 추가하며 전달하는 방식
+	쿼리스트링을 사용한다
+	주소에 데이터가 추가되므로 길이에 제한이 있으며 데이터가 노출되므로 보안상 취약하지만
+	빠르다는 장점이 있다.
+
+	* 쿼리스트링 : 주소뒤에 ?로 시작하는 문자열
+	  주소?parameter1=value1&parameter2=value2&....
+ 
+POST방식
+	데이터를 주소가 아닌 요청(request)에 저장하여 전송한다
+	데이터의 길이에 제한이 있지만 GET방식에 비해 대용량의 데이터를 전송할 수 있다
+	보안상으로 GET방식보다 상대적으로 좋지만 다른 보안처리를 하지 않으면 여전히 취약하다
+	상대적으로 느리다.
+
+GET, POST 언제 사용하는가?
+	데이터의 양이 적으며, 주소에 노출되어도 상관없다면 GET방식
+	ex) 게시판 페이지 정보, 카테고리 정보
+	
+	데이터의 양이 많으며, 민감한 데이터를 포함하고 있다면 POST방식
+	ex) 로그인, 회원가입, 글쓰기(길어서) 정보
+	
+forward와 redirect
+	서버에서 클라이언트 화면의 페이지를 전환시키는 방식
+
+forward
+	request.getRequestDispatcher("파일경로").forward(request, response);
+
+	request와 response를 가지고 매개변수로 넘겨준 파일로 이동한다
+	클라이언트가 저장한 데이터를 계속 저장하고 있다
+	해당 파일의 결과를 response에 담아 클라이언트에게 보낸다
+	브라우저의 URL이 변경되지 않는다
+	상대적으로 서버에 부담이 적다
+	파일 경로는 WebContent가 루트 경로이다
+
+redirect
+	response.sendRedirect("URL경로");
+
+	사용자 브라우저를 특정 URL로 바로 이동시킨다
+	기존의 request, response를 버리기 때문에 클라이언트가 이전에 입력한 데이터를 저장하지 않는다.
+	브라우저의 URL이 변경된다
+	상대적으로 서버에 부담이 많다
+	URL경로는 우리가 설정한 루트 경로를 기준으로 작성한다
+
+	ex) /day03 url 루트경로, WebContent 폴더를 의미한다
+	    /day03/hello 경로로 요청이 오면 web.xml에서 매핑된 경로를 찾아가고
+	    매핑된 경로가 없다면 WebContent에서 파일을 찾는다.
+
+사용방법
+	사용자에게 민감한 정보를 입력받은 경우 redirect를 사용한다
+	ex) 결제 정보, 회원 정보 등
+=================================================================================
+실습
+1. day03_task 프로젝트 생성
+	URL 루트경로는 /task이다
+
+2. index.jsp를 만든다.
+	'접속'이라는 버튼이 있다
+	버튼을 누르면 get방식을 사용하여 MyServlet으로 요청이 간다.
+
+3. login.jsp를 만든다.
+	사용자에게 아이디와 비밀번호를 입력받아 로그인 버튼을 누르면 post 방식을 사용하여
+	MyServlet으로 요청이 간다.
+
+4. com.servlet.app 패키지에 MyServlet2 서블릿을 만든다
+	URL 경로는 MyServlet2이다
+	get 방식으로 요청을 받으면 forward방식으로 page1.jsp로 이동한다
+	post 방식으로 요청을 받으면 redirect 방식으로 index.jsp로 이동한다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,12 @@
+복습
+JDBC
+
+DBCP : 일정량의 커넥션 객체를 만들어두고 Connection Pool에 보관하여 필요할 때마다
+	커넥션 객체를 꺼내서 사용하고 반납하는 방식으로 관리
+JNDI : 외부의 자원을 자바의 객체로 가져와서 사용할 때 필요한 기술, API
+
+MyBatis Framework : 관계형 데이터베이스를 자바에서 쉽게 다루도록 도와주는 프레임워크
+
+XML파일
+	Extensible Markup Language의 약자
+	확장 가능한 마크업 언어
