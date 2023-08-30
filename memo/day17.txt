@@ -1,5 +1,3 @@
-
-
 퍼블리싱 압축파일 풀기
 
 finalProject 프로젝트 만들기
@@ -69,3 +67,63 @@ finalProject 프로젝트 만들기
          sqlSession.insert("member.join", memberDTO);
       }
    }
+
+
+
+기능추가
+mapper(쿼리문 작성) -> dao(쿼리문,dto타입 사용) -> controller
+
+serverException : 서블릿 컨테이너 내부에서 처리할 수 없는 예외가 발생한 경우
+servletException : 서블릿 실행 도중에 문제가 발생한 경우
+
+동기통신
+	서버에 요청을 보내면 기다렸다가 서버의 응답을 받는 일반적인 통신 방법이다
+	서버의 응답이 오기 전까지 다른 작업을 수행할 수 없다
+	서버의 응답이 도착하면 페이지가 전환되며 같은 페이지에 머무르더라도 페이지가 새로고침이 된다
+
+비동기 통신
+	서버에 요청을 보내고 서버의 응답을 기다리는 동안 다른 작업을 처리할 수 있따
+	서버의 응답이 도착해도 페이지가 새로고침 되지 않는다
+	즉, 하나의 브라우저가 보여주는 하나의 페이지에서 데이터를 주고받는게 가능하며
+	이를 통해 사용자의 경험을 개선하고 성능을 향상시킬 수 있다.
+
+Ajax(Asynchronous JavaScript and XML)
+	웹 페이지에서 서버와 비동기 통신을 하기 위한 기술이며, 화면의 일부만 데이터를 업데이트 할 수 있다
+	JavaScript를 이용하여 JSON, XML형식의 데이터를 서버와 주고 받는다.
+	일반 통신과 다르게 XMLHttpRequest를 사용하여 데이터를 주고 받는다.
+	
+jquery의 ajax 사용법
+	$.ajax({
+		url : "요청주소",
+		type : "GET 또는 POST",
+		data : "전송할 데이터",
+		contentType : "전송할 데이터 형식",
+		dataType : "받을 데이터 형식",
+		success : function(response){
+			//성공시 수행할 코드
+		},
+		error : function(xhr, status, error){
+			//실패시 수행할 코드
+			//xhr : XMLHttpRequest 객체
+			console.log("Ajax 요청이 실패했습니다");
+			console.log("상태코드 : ", status);
+			console.log("에러 메시지 : ", error);
+		}
+	})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
