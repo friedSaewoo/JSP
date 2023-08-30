@@ -1,0 +1,11 @@
+day02_mybatis_task 프로젝트 생성
+
+day01_mybatis 가입한 회원정보를 활용해서 로그인 구현하기
+
+URL 루트 경로 /task로 설정
+MyBatis,mysql 빌드패스 => lib에 추가하기
+MyBatis 설정
+	com.mybatis.config 패키지 안에 config.xml, MyBatisConfig.java
+login.jsp
+
+http://localhost:8888/task/login.jsp

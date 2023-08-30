@@ -1,0 +1,160 @@
+GET, POST
+	GET : 주소에 노출되어도 상관없다면 GET
+	POST : 민감한 데이터를 포함하고 있다면 POST
+
+forward, redirect
+	forward : 클라이언트가 저장한 데이터를 계속 저장하고 있다
+		request.getRequestDispatcher("파일경로").forward(request, response)
+
+	redirect : 사용자 브라우저를 특정 URL로 바로 이동시킨다
+		response.sendRedirect("URL경로");
+
+JSP 태그
+	JSP 사용가능한 태그이며 다양한 기능을 지원한다
+	JSP 태그를 이용하여 HTML 내부에 자바코드 사용이 가능하지만 다른 언어가 섞이면 좋지 않기때문에
+	JSTL과 EL이 등장하였고 JSP태그의 사용빈도가 낮아졌다
+
+1. 지시자 태그 <%@ 지시자 ... %>
+	지시자 종류
+	page : 페이지 속성을 지시하는 태그
+
+	include : 다른 파일의 내용을 포함시키는 태그
+	<%@ include file = "header.jsp" %>
+	
+	taglib : 태그 라이브러리를 지정하는 태그
+		<%@ taglib url = "http://java.sun.com/jsp/" prefix = "c" %>
+
+2. 선언태그 <%! ... %>
+	변수, 메소드를 선언할 때 사용한다
+	선언 태그 안에 만든 변수, 메소드는 해당 페이지 안에서 언제든 사용이 가능하다(전역변수와 전역메소드)
+
+3. 표현식태그 <%= ...%>
+	변수, 메소드의 결과값을 출력할 때 사용한다
+
+4. 스크립틀릿 <% ... %>
+	자바코드를 삽입하기 위해 사용한다
+	자바코드를 자유롭게 사용할 수 있다
+
+5. 주석 <%-- ... --%>
+	JSP 주석은 컴파일 자체를 막아버린다
+	일반 HTML 코드는 html 주석을 사용해도 되지만 jsp와 관련된 코드를 주석처리할 때는
+	반드시 jsp 주석을 사용한다
+
+6. 액션태그 <jsp:action> </jsp:action>
+	action 종류는 여러가지가 있지만 JSTL, EL의 등장으로 잘 사용되지 않는다.
+	액션태그를 너무 많이 사용하면 코드가 복잡하고 유지보수가 어렵다
+	- include : 다른 페이지의 코드를 현재 위치에 포함시킨다
+	
+
+JSTL, EL
+	둘 다 JSP에서 자바코드를 대신하여 사용하며 외부 라이브러리(DOWNLOAD 필요)
+	서블릿에서 JSP로 기술이 발전하였지만 여전히 HTML코드와 JAVA 코드가 같이 사용된다는 단점이 있다.
+	JSTL태그, EL태그 표현식을 사용하면 자바 코드를 대체하게 되어 태그로만 구성된 페이지를 만들 수 있다
+	
+다운로드
+	구글 > JSTL Download 검색 > 최상단 톰캣 사이트 접속 > stancard 1.1을 사용한다
+	
+	binaries 클릭 > jakarta-taglibx-standard-1.1.2.zip 다운로드
+	압축 해제하면 lib 폴더에 jar파일 2개 있다
+	둘 다 프로젝트 lib 폴더에 넣고 빌드패스 추가한다.
+
+EL(Expression Language)
+	JSP에서 사용하는 표현언어
+	JSP에서 JAVA로 가져온 값을 간편하는데 사용한다
+	${}를 사용한다
+	ex) <%=name%> -> ${name}
+
+1) page 스코프
+	JSP 페이지를 의미한다
+	현재 페이지 내에서만 유효하다는 의미이다
+	JSP페이지에서 아래와 같이 작성하면 page 스코프 변수를 만들 수 있다
+	pageContext.setAttribute("name", "홍길동")
+
+	page 스코프를 가진 변수를 사용할 때는
+	${name}
+
+2) request 스코프
+	request에 저장된 데이터를 의미한다
+	${requestScope.name}
+
+3) session 스코프
+	session에 저장된 데이터를 의미한다
+	${sessionScope.name}
+
+4) application 스코프
+	어플리케이션 전체에서 사용 가능한 데이터를 의미한다
+	${applicationScope.name}
+
+만약 get방식으로 데이터를 url에 포함시킨 경우
+	ex) www.page.com/test.jsp?name=홍길동
+	${param.name} 주소에 있는 데이터를 가져온다
+
+값을 찾을 때 스코프를 명시하지 않았을때의 찾는 순서
+   	page -> request -> session -> application
+
+EL 연산자
+	%, mode
+	&&, and
+	||, or
+	>, gt
+	<, lt
+	>=, ge
+	<=, le
+	==, eq
+	!=, ne
+	!, not
+	empty
+
+JSTL(Jsp Standard Tag Library)
+	JSP에서 사용가능한 태그 라이브러리
+	JSP에서 JAVA를 사용하지 않고도 반복문, 조건문 등을 처리할 수 있는 태그이다
+	
+JSTL의 사용 방법
+	<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix ="c" %>
+	JSTL을 사용하기 위해서 JSP 페이지 상단에 위의 코드를 작성한다
+
+태그의 종류
+1) <c:set>	  변수선언
+2) <c:out>	  값 출력
+3) <c:if>	  단순 if문
+4) <c:choose>	  여러 조건문의 시작(if~else if~else)
+   <c:when>	  조건문의 조건식을 작성, 조건문의 else if를 의미함
+   <c:otherwise>  조건문의 else를 의미함
+5) <c:forEach>	  반복문
+	자바				JSTL
+	for(초기식; 조건식; 증감식){}		<c:forEach var="" begin="" end=""></c:forEach>
+	for(자료형 변수명 : 자료구조){}	<c:forEach var="" items="${}"></c:forEach>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

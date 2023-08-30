@@ -1,0 +1,68 @@
+jsp day 09
+
+패키지 명명 규칙
+	news.naver.com -> com.naver.news
+	
+	com.회사명.어플리케이션이름
+
+@WebServlet("/Hello") 					      //현재 서블릿을 상속받아 만든 서블릿 클래스와 URL 경로를 서로 매핑시켜주는 역할 사용자가 우리 서버주소 뒤에 /Hello를 작성하면 현재 서블릿이 요청을 받게 되는 것이다
+public class TestServlet extends HttpServlet {		      //사용자가 우리 서버주소 뒤에 /Hello를 작성하면 현재 서블릿이 요청을 받게 되는 것이다
+	private static final long serialVersionUID = 1L;
+       
+ 
+    public TestServlet() {		//기본 생성자
+        super();
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+
+	//doGet()과 doPost()메소드
+	HttpServlet 클래스에 존재하며 오버라이딩을 하는 것
+	각 메소드는 사용자의 요청방식에 따라 알아서 실행된다
+	get -> doGet()
+	post -> doPost()
+	매개변수 요청을 받기위한 request, 응답을 받기 위한 response
+
+서블릿 파일을 만들 때 > JAVA r~~ > 패키지 > servlet 파일
+
+
+JSP(Java Server Page)
+	java를 기반으로 만든 웹 프로그래밍 기술이다
+	서블릿의 불편한 점을 개선하고자 HTML에 JAVA코드를 작성할 수 있도록 만들어졌으며
+	동적인 페이지를 만드는데 특화되어있다
+	JSP도 서블릿 클래스처럼 웹 컨테이너가 관리하며, 웹 컨테이너가 JSP를 실행시킬 때, 서블릿으로 변환하여 실행된다
+	즉, JSP는 내부적으로 서블릿으로 변환되어 실행된다
+
+JSP파일 만들 때 > WebContent 폴더 > jsp file 
+
+web.xml 사용했을 때 요청 흐름
+	1. 클라이언트가 request를 보낸다.
+	2. 웹 서버가 사용자가 보낸 request URL을 검사하여 어떤 서블릿이 request를 처리해야하는지 결정한다
+	3. 만약 요청이 정적 페이지를 원한다면 웹 서버는 자체적으로 처리하여 응답을 클라이언트에게 보내준다
+	4. 만약 요청이 동적 페이지를 원한다면 웹 서버는 서블릿 컨테이너의 도움을 받는다
+	5. 서블릿 컨테이너는 web.xml 파일에서 URL에 해당하는 서블릿을 찾아서 실행한다
+	6. 서블릿은 request를 처리하여 서블릿 컨테이너에게 전달하고 서블릿 컨테이너는 웹서버로 전달한다
+	7. 최종적으로 웹 서버는 클라이언트에게 응답을 보낸다.
+
+
+
+
+
+
+
+
+
+
+
+
