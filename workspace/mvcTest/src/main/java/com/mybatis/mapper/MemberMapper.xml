@@ -6,14 +6,13 @@
          value(#{memberId}, #{memberPassword}, #{memberName}, #{memberAge}, #{memberGender})
    </insert>
    
-   <!-- 중복검사 쿼리 -->
-   <select id="checkId" parameterType="string" resultType="_int">
-      select count(member_number) from tbl_member
-      where member_id = #{memberId}
+   <select id ="login" parameterType="MemberDTO" resultType="MemberDTO">
+   		select * from tbl_member
+   		where member_id = #{memberId} AND member_password = #{memberPassword}
    </select>
    
-   <select id = "login" parameterType = "MemberDTO" resultType="int">
-      select member_number from tbl_member
-      where member_id= #{memberId} and member_Password = #{memberPassword}
+   <select id = "checkId" parameterType="string" resultType="_int">
+   		select count(member_number) from tbl_member
+   		where member_id = #{memberId}
    </select>
 </mapper>

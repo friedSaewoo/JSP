@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -27,7 +28,7 @@
     <div class="container">
       <div class="write-btn-wrap">
         <!-- 글쓰기 페이지 이동 처리 -->
-        <a href="${pageContext.request.contextPath}/board/boardWrite.bo" class="write-btn">글쓰기</a>
+        <a href="#" class="write-btn">글쓰기</a>
       </div>
       <table class="board-table">
         <thead>
@@ -41,27 +42,24 @@
         </thead>
         <tbody>
           <!-- ========== 게시글 목록 예시 =========== -->
-          <tr>
-            <td class="no">1</td>
-            <td class="title">첫 번째 게시글입니다.</td>
-            <td class="author">짱구</td>
-            <td class="date">2023-08-28</td>
-            <td class="hit">10</td>
-          </tr>
-          <tr>
-            <td class="no">2</td>
-            <td class="title">두 번째 게시글입니다.</td>
-            <td class="author">철수</td>
-            <td class="date">2023-08-28</td>
-            <td class="hit">15</td>
-          </tr>
-          <tr>
-            <td class="no">3</td>
-            <td class="title">세 번째 게시글입니다.</td>
-            <td class="author">훈이</td>
-            <td class="date">2023-03-06</td>
-            <td class="hit">20</td>
-          </tr>
+          <c:choose>
+             <c:when test = "${not empty boardList}">
+              <c:forEach var="board" items="${boardList}">
+                 <tr>
+                    <td><c:out value = "${board.getBoardNumber()}"/></td>
+                    <td><c:out value = "${board.getBoardTitle()}"/></td>
+                    <td><c:out value = "${board.getMemberId()}"/></td>
+                    <td><c:out value = "${board.getBoardDate()}"/></td>
+                    <td><c:out value = "${board.getBoardReadCount()}"/></td>
+                 </tr>
+         </c:forEach>
+             </c:when>
+             <c:otherwise>
+                <tr>
+                   <td colspan = "5" align = "center" > 등록된 게시물이 없습니다 </td>
+                </tr>
+             </c:otherwise>
+          </c:choose>
           <!-- ========== /게시글 목록 예시 =========== -->
         </tbody>
       </table>

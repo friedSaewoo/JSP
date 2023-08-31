@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-   <select id = "join" parameterType="">
+   <insert id = "join" parameterType="memberDTO">
          insert into tbl_member(member_id, member_password, member_name, member_age, member_gender)
          value(#{memberId}, #{memberPassword}, #{memberName}, #{memberAge}, #{memberGender})
+   </insert>
+   
+   <select id = "selectAll" resultType = "BoardVO"><!-- 테이블과 일치하지 않는 결과를 가져오기위해 VO를 사용 -->
+   	select m.member_number, m.member_id, b.board_number, b.board_title, b.board_content,
+   	b.board_date, b.board_read_count
+   		from tbl_member m join tbl_board b
+   		on m.member_number = b.member_number
+   		
    </select>
+ 
 </mapper>

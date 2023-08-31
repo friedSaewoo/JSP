@@ -11,7 +11,7 @@
   <body>
     <div class="container">
       <!-- join처리 경로 잡기 -->
-      <form action="#" method="POST">
+      <form action="${pageContext.request.contextPath }/member/joinOk.me" method="POST">
         <h2>회원 가입</h2>
         <div class="form-group">
           <label for="id">아이디</label>
@@ -62,4 +62,6 @@
       </form>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="${pageContext.request.contextPath}/assets/js/join.js"></script>
 </html>
